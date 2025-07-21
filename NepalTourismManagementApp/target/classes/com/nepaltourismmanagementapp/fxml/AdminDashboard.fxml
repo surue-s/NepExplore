@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.image.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nepaltourismmanagementapp.controller.AdminDashboardController">
+
+   <!-- Background Image -->
+   <ImageView fitWidth="1200" fitHeight="800" preserveRatio="false">
+      <image>
+         <Image url="@../images/nepal-background.jpg" />
+      </image>
+   </ImageView>
+
+   <!-- Main Content -->
+   <BorderPane>
+   <left>
+      <VBox prefWidth="250.0" styleClass="sidebar">
+         <children>
+            <Label text="Admin Dashboard" styleClass="nav-title" />
+            <Region prefHeight="30.0" />
+            <Button mnemonicParsing="false" onAction="#handleViewStatistics" prefWidth="200.0" styleClass="sidebar-button" text="📊 Statistics" />
+            <Button mnemonicParsing="false" onAction="#handleManageUsers" prefWidth="200.0" styleClass="sidebar-button" text="👥 Manage Users" />
+            <Button mnemonicParsing="false" onAction="#handleManageAttractions" prefWidth="200.0" styleClass="sidebar-button" text="🏛️ Manage Attractions" />
+            <Button mnemonicParsing="false" onAction="#handleViewAllBookings" prefWidth="200.0" styleClass="sidebar-button" text="📅 All Bookings" />
+            <Button mnemonicParsing="false" onAction="#handleGenerateReport" prefWidth="200.0" styleClass="sidebar-button" text="📋 Generate Report" />
+            <Button mnemonicParsing="false" onAction="#handleRefreshData" prefWidth="200.0" styleClass="sidebar-button" text="🔄 Refresh Data" />
+            <Region VBox.vgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#handleLogout" prefWidth="200.0" styleClass="sidebar-button" text="🚪 Logout" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </left>
+   <center>
+      <ScrollPane fitToWidth="true">
+         <content>
+            <VBox spacing="20.0" styleClass="content-area">
+               <children>
+                  <Label fx:id="welcomeLabel" styleClass="title-label" text="Welcome Admin!">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+
+                  <!-- Statistics Cards -->
+                  <GridPane hgap="20.0" vgap="20.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                     </columnConstraints>
+                     <children>
+                        <VBox alignment="CENTER" spacing="10.0" styleClass="stat-card-users" GridPane.columnIndex="0">
+                           <children>
+                              <Label fx:id="totalUsersLabel" styleClass="stat-number" text="0" />
+                              <Label styleClass="stat-title" text="👥 Total Users" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="10.0" styleClass="stat-card-attractions" GridPane.columnIndex="1">
+                           <children>
+                              <Label fx:id="totalAttractionsLabel" styleClass="stat-number" text="0" />
+                              <Label styleClass="stat-title" text="🏛️ Total Attractions" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="10.0" styleClass="stat-card-bookings" GridPane.columnIndex="2">
+                           <children>
+                              <Label fx:id="totalBookingsLabel" styleClass="stat-number" text="0" />
+                              <Label styleClass="stat-title" text="📅 Total Bookings" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="10.0" styleClass="stat-card-revenue" GridPane.columnIndex="3">
+                           <children>
+                              <Label fx:id="totalRevenueLabel" styleClass="stat-number" text="NPR 0.00" />
+                              <Label styleClass="stat-title" text="💰 Total Revenue" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <rowConstraints>
+                        <RowConstraints />
+                     </rowConstraints>
+                  </GridPane>
+
+                  <!-- Quick Actions -->
+                  <HBox spacing="15.0">
+                     <children>
+                        <Button onAction="#handleViewStatistics" styleClass="primary-button" text="View Detailed Statistics" />
+                        <Button onAction="#handleGenerateReport" styleClass="secondary-button" text="Generate System Report" />
+                        <Button onAction="#handleRefreshData" styleClass="secondary-button" text="Refresh All Data" />
+                     </children>
+                  </HBox>
+
+                  <!-- Users Management -->
+                  <VBox spacing="15.0" styleClass="management-card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="15.0">
+                           <children>
+                              <Label text="👥 User Management" styleClass="section-title">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Region HBox.hgrow="ALWAYS" />
+                              <Label fx:id="userCountLabel" text="Total: 0" styleClass="stat-label" />
+                           </children>
+                        </HBox>
+                        
+                        <!-- User CRUD Buttons -->
+                        <HBox spacing="10.0" styleClass="crud-button-bar">
+                           <children>
+                              <Button onAction="#handleCreateUser" styleClass="success-button" text="➕ Create User" />
+                              <Button onAction="#handleViewUser" styleClass="primary-button" text="👁️ View Details" />
+                              <Button onAction="#handleEditUser" styleClass="warning-button" text="✏️ Edit User" />
+                              <Button onAction="#handleDeleteUser" styleClass="danger-button" text="🗑️ Delete User" />
+                              <Region HBox.hgrow="ALWAYS" />
+                              <Button onAction="#handleRefreshData" styleClass="secondary-button" text="🔄 Refresh" />
+                           </children>
+                        </HBox>
+                        
+                        <TableView fx:id="usersTable" styleClass="data-table" prefHeight="250.0">
+                           <columns>
+                              <TableColumn fx:id="userIdCol" prefWidth="120.0" text="User ID" />
+                              <TableColumn fx:id="usernameCol" prefWidth="150.0" text="Username" />
+                              <TableColumn fx:id="emailCol" prefWidth="220.0" text="Email" />
+                              <TableColumn fx:id="userTypeCol" prefWidth="100.0" text="Type" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+
+                  <!-- Attractions Management -->
+                  <VBox spacing="15.0" styleClass="management-card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="15.0">
+                           <children>
+                              <Label text="🏛️ Attraction Management" styleClass="section-title">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Region HBox.hgrow="ALWAYS" />
+                              <Label fx:id="attractionCountLabel" text="Total: 0" styleClass="stat-label" />
+                           </children>
+                        </HBox>
+                        
+                        <!-- Attraction CRUD Buttons -->
+                        <HBox spacing="10.0" styleClass="crud-button-bar">
+                           <children>
+                              <Button onAction="#handleCreateAttraction" styleClass="success-button" text="➕ Create Attraction" />
+                              <Button onAction="#handleViewAttraction" styleClass="primary-button" text="👁️ View Details" />
+                              <Button onAction="#handleEditAttraction" styleClass="warning-button" text="✏️ Edit Attraction" />
+                              <Button onAction="#handleDeleteAttraction" styleClass="danger-button" text="🗑️ Delete Attraction" />
+                              <Region HBox.hgrow="ALWAYS" />
+                              <Button onAction="#handleRefreshData" styleClass="secondary-button" text="🔄 Refresh" />
+                           </children>
+                        </HBox>
+                        
+                        <TableView fx:id="attractionsTable" styleClass="data-table" prefHeight="250.0">
+                           <columns>
+                              <TableColumn fx:id="attractionIdCol" prefWidth="100.0" text="ID" />
+                              <TableColumn fx:id="attractionNameCol" prefWidth="200.0" text="Name" />
+                              <TableColumn fx:id="locationCol" prefWidth="150.0" text="Location" />
+                              <TableColumn fx:id="categoryCol" prefWidth="120.0" text="Category" />
+                              <TableColumn fx:id="feeCol" prefWidth="100.0" text="Fee (NPR)" />
+                              <TableColumn fx:id="activeCol" prefWidth="80.0" text="Active" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+
+                  <!-- Bookings Overview -->
+                  <VBox spacing="15.0" styleClass="dashboard-card">
+                     <children>
+                        <Label text="Recent Bookings">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="bookingsTable" maxHeight="200.0">
+                           <columns>
+                              <TableColumn fx:id="bookingIdCol" prefWidth="120.0" text="Booking ID" />
+                              <TableColumn fx:id="touristIdCol" prefWidth="100.0" text="Tourist ID" />
+                              <TableColumn fx:id="guideIdCol" prefWidth="100.0" text="Guide ID" />
+                              <TableColumn fx:id="statusCol" prefWidth="100.0" text="Status" />
+                              <TableColumn fx:id="amountCol" prefWidth="120.0" text="Amount (NPR)" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
+
+</StackPane>

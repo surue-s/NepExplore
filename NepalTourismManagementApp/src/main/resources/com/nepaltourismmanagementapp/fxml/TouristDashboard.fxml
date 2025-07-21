@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.nepaltourismmanagementapp.controller.TouristDashboardController">
+
+   <!-- Background Image -->
+   <ImageView fitWidth="1200" fitHeight="800" preserveRatio="false">
+      <image>
+         <Image url="@../images/nepal-background.jpg" />
+      </image>
+   </ImageView>
+
+   <!-- Main Content -->
+   <BorderPane>
+
+   <!-- Sidebar -->
+   <left>
+      <VBox prefWidth="250.0" styleClass="sidebar">
+         <padding><Insets top="20.0" bottom="20.0" left="20.0" right="20.0"/></padding>
+         <children>
+            <Label text="Tourist Dashboard" styleClass="nav-title" />
+            <Region prefHeight="30.0"/>
+            <Button fx:id="attractionsButton" onAction="#handleViewAttractions" text="🏛️ Attractions" prefWidth="200.0" styleClass="sidebar-button"/>
+            <Button fx:id="myBookingsButton" onAction="#handleViewBookings" text="📅 My Bookings" prefWidth="200.0" styleClass="sidebar-button"/>
+            <Button fx:id="statisticsButton" onAction="#handleStatistics" text="📊 Statistics" prefWidth="200.0" styleClass="sidebar-button"/>
+            <Button fx:id="profileButton" onAction="#handleProfile" text="👤 Profile" prefWidth="200.0" styleClass="sidebar-button"/>
+            <Button fx:id="emergencyButton" onAction="#handleEmergency" text="🚨 Emergency" prefWidth="200.0" styleClass="sidebar-button emergency-button"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button fx:id="logoutButton" onAction="#handleLogout" text="🚪 Logout" prefWidth="200.0" styleClass="sidebar-button"/>
+         </children>
+      </VBox>
+   </left>
+
+   <!-- Main Content -->
+   <center>
+      <ScrollPane fitToWidth="true">
+         <content>
+            <VBox fx:id="contentArea" spacing="20.0" styleClass="content-area">
+               <padding><Insets top="30.0" bottom="30.0" left="30.0" right="30.0"/></padding>
+               <children>
+
+                  <!-- Welcome -->
+                  <Label fx:id="welcomeLabel" text="Welcome, Tourist!" styleClass="title-label">
+                     <font><Font name="System Bold" size="24.0" /></font>
+                  </Label>
+
+                  <!-- Latest Attractions Preview -->
+                  <VBox spacing="15.0" styleClass="dashboard-card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="15.0">
+                           <children>
+                              <Label text="Latest Attractions">
+                                 <font><Font name="System Bold" size="18.0" /></font>
+                              </Label>
+                              <Region HBox.hgrow="ALWAYS" />
+                              <Button fx:id="viewAllAttractionsButton" onAction="#handleViewAttractions" styleClass="primary-button" text="View All" />
+                           </children>
+                        </HBox>
+                        <ScrollPane hbarPolicy="NEVER" vbarPolicy="NEVER" fitToHeight="true">
+                           <content>
+                              <HBox fx:id="latestAttractionsContainer" spacing="15.0" styleClass="attraction-preview-cards">
+                                 <!-- Latest attraction cards will be dynamically added here -->
+                              </HBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+
+                  <!-- Quick Stats -->
+                  <GridPane hgap="20.0" vgap="20.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                     </columnConstraints>
+                     <children>
+                        <VBox alignment="CENTER" spacing="10.0" styleClass="stat-card" GridPane.columnIndex="0">
+                           <children>
+                              <Label fx:id="totalAttractionsLabel" styleClass="stat-number" text="0" />
+                              <Label styleClass="stat-title" text="Total Attractions" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="10.0" styleClass="stat-card" GridPane.columnIndex="1">
+                           <children>
+                              <Label fx:id="myBookingsLabel" styleClass="stat-number" text="0" />
+                              <Label styleClass="stat-title" text="My Bookings" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="10.0" styleClass="stat-card" GridPane.columnIndex="2">
+                           <children>
+                              <Label fx:id="totalSpentLabel" styleClass="stat-number" text="NPR 0" />
+                              <Label styleClass="stat-title" text="Total Spent" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <rowConstraints>
+                        <RowConstraints />
+                     </rowConstraints>
+                  </GridPane>
+
+                  <!-- My Recent Bookings -->
+                  <VBox spacing="15.0" styleClass="glass-panel">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="15.0">
+                           <children>
+                              <Label text="📅 My Recent Bookings" styleClass="glass-text">
+                                 <font><Font name="System Bold" size="16.0" /></font>
+                              </Label>
+                              <Region HBox.hgrow="ALWAYS" />
+                              <Button onAction="#handleViewBookings" styleClass="primary-button" text="📋 View All Bookings" />
+                           </children>
+                        </HBox>
+                        <TableView fx:id="recentBookingsTable" maxHeight="200.0" styleClass="enhanced-table">
+                           <columns>
+                              <TableColumn fx:id="bookingIdCol" text="Booking ID" prefWidth="120.0"/>
+                              <TableColumn fx:id="attractionCol" text="Attraction" prefWidth="200.0"/>
+                              <TableColumn fx:id="visitDateCol" text="Visit Date" prefWidth="120.0"/>
+                              <TableColumn fx:id="statusCol" text="Status" prefWidth="100.0"/>
+                              <TableColumn fx:id="amountCol" text="Amount (NPR)" prefWidth="120.0"/>
+                           </columns>
+                        </TableView>
+                        <HBox spacing="10.0" alignment="CENTER_LEFT">
+                           <children>
+                              <Button onAction="#handleQuickBooking" styleClass="primary-button" text="🚀 Quick Booking" />
+                              <Button onAction="#handleViewBookings" styleClass="secondary-button" text="📊 Manage Bookings" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+
+                  <!-- Festival Discount Info -->
+                  <VBox fx:id="festivalDiscountCard" spacing="10.0" styleClass="dashboard-card" visible="false">
+                     <children>
+                        <Label text="🎉 Festival Special!" styleClass="success-label">
+                           <font><Font name="System Bold" size="16.0" /></font>
+                        </Label>
+                        <Label fx:id="festivalDiscountLabel" text="Enjoy special discounts during festivals!" />
+                     </children>
+                  </VBox>
+
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+
+   </BorderPane>
+
+</StackPane>

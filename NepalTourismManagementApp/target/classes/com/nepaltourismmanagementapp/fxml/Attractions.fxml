@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nepaltourismmanagementapp.controller.AttractionsController">
+    
+    <!-- Background Image -->
+    <ImageView fx:id="backgroundImage" fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="false">
+        <image>
+            <Image url="@../images/nepal-background.jpg" />
+        </image>
+    </ImageView>
+    
+    <!-- Semi-transparent overlay -->
+    <Region styleClass="background-overlay" />
+    
+    <!-- Main Content -->
+    <BorderPane>
+        <!-- Top Navigation Bar -->
+        <top>
+            <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="top-nav">
+                <children>
+                    <Button fx:id="backButton" onAction="#handleBack" styleClass="nav-button" text="←" />
+                    <Label styleClass="nav-title" text="Attractions">
+                        <font>
+                            <Font name="System Bold" size="24.0" />
+                        </font>
+                    </Label>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label styleClass="brand-logo" text="NEPEXPLORE">
+                        <font>
+                            <Font name="System Bold" size="18.0" />
+                        </font>
+                    </Label>
+                </children>
+                <padding>
+                    <Insets bottom="15.0" left="30.0" right="30.0" top="15.0" />
+                </padding>
+            </HBox>
+        </top>
+        
+        <!-- Main Content Area -->
+        <center>
+            <VBox prefHeight="732.0" prefWidth="1519.0" spacing="30.0" styleClass="main-content">
+                <children>
+                    <!-- Featured Attraction Display -->
+                    <VBox fx:id="featuredAttractionCard" spacing="20.0" styleClass="featured-attraction">
+                        <children>
+                            <Label fx:id="featuredAttractionName" prefHeight="70.0" prefWidth="293.0" styleClass="featured-title" text="Kathmandu">
+                                <font>
+                                    <Font name="System Bold" size="48.0" />
+                                </font>
+                            </Label>
+                            <Label fx:id="featuredAttractionDescription" styleClass="featured-description" text="Nepal is renowned for its majestic Himalayan mountain ranges, including Mount Everest, the world's highest peak. These mountains are not only a source of natural beauty but also hold significant cultural and spiritual importance for the Nepali people." wrapText="true">
+                                <font>
+                                    <Font size="16.0" />
+                                </font>
+                            </Label>
+                            <HBox spacing="15.0">
+                                <children>
+                                    <Button fx:id="safetyWarningsButton" styleClass="warning-button" text="Safety Warnings" />
+                                    <Button fx:id="bookButton" onAction="#handleBooking" styleClass="book-button" text="BOOK">
+                                        <font>
+                                            <Font name="System Bold" size="16.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                            </HBox>
+                        </children>
+                    </VBox>
+                    
+                    <!-- Navigation Arrows -->
+                    <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="917.0" spacing="10.0">
+                        <children>
+                            <Button fx:id="prevButton" onAction="#handlePreviousAttraction" styleClass="nav-arrow" text="◀" />
+                            <Button fx:id="nextButton" onAction="#handleNextAttraction" styleClass="nav-arrow" text="▶" />
+                        </children>
+                    </HBox>
+                </children>
+                <padding>
+                    <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                </padding>
+            </VBox>
+        </center>
+        
+        <!-- Bottom Scrollable Attraction Panel -->
+        <bottom>
+            <VBox styleClass="bottom-panel">
+                <children>
+                    <Label styleClass="panel-title" text="Explore More Attractions">
+                        <font>
+                            <Font name="System Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <ScrollPane fx:id="attractionScrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER">
+                        <content>
+                            <HBox fx:id="attractionCardsContainer" spacing="20.0" styleClass="attraction-cards">
+                                <!-- Attraction cards will be dynamically added here -->
+                            </HBox>
+                        </content>
+                    </ScrollPane>
+                </children>
+                <padding>
+                    <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                </padding>
+            </VBox>
+        </bottom>
+    </BorderPane>
+    
+    <!-- Booking Modal (Hidden by default) -->
+    <VBox fx:id="bookingModal" alignment="CENTER" spacing="20.0" styleClass="booking-modal" visible="false">
+        <children>
+            <VBox alignment="CENTER" spacing="15.0" styleClass="modal-content">
+                <children>
+                    <Label styleClass="modal-title" text="Book Your Adventure">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                    </Label>
+                    <GridPane hgap="15.0" vgap="15.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" />
+                            <ColumnConstraints hgrow="SOMETIMES" />
+                        </columnConstraints>
+                        <children>
+                            <VBox spacing="5.0" GridPane.columnIndex="0">
+                                <children>
+                                    <Label text="Visit Date:" />
+                                    <DatePicker fx:id="visitDatePicker" />
+                                </children>
+                            </VBox>
+                            <VBox spacing="5.0" GridPane.columnIndex="1">
+                                <children>
+                                    <Label text="Number of People:" />
+                                    <Spinner fx:id="peopleSpinner" />
+                                </children>
+                            </VBox>
+                        </children>
+                  <rowConstraints>
+                     <RowConstraints />
+                  </rowConstraints>
+                    </GridPane>
+                    <TextArea fx:id="specialRequestsArea" maxHeight="80.0" promptText="Special requests or notes..." />
+                    <Label fx:id="totalAmountLabel" styleClass="total-amount" text="Total: NPR 0.00">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="festivalDiscountLabel" styleClass="discount-label" text="Festival Discount Applied!" visible="false" />
+                    <HBox spacing="15.0">
+                        <children>
+                            <Button onAction="#handleConfirmBooking" styleClass="confirm-button" text="Confirm Booking" />
+                            <Button onAction="#handleCancelBooking" styleClass="cancel-button" text="Cancel" />
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+        </children>
+    </VBox>
+</StackPane>

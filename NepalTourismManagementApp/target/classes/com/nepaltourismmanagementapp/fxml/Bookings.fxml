@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.nepaltourismmanagementapp.controller.BookingsController">
+
+   <!-- Background Image -->
+   <ImageView fitWidth="1200" fitHeight="800" preserveRatio="false">
+      <image>
+         <Image url="@../images/nepal-background.jpg" />
+      </image>
+   </ImageView>
+
+   <!-- Main Content -->
+   <BorderPane>
+
+   <!-- Header -->
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="header">
+         <padding><Insets top="15.0" bottom="15.0" left="20.0" right="20.0"/></padding>
+         <children>
+            <Button fx:id="backButton" onAction="#handleBack" text="← Back" styleClass="secondary-button"/>
+            <Label fx:id="titleLabel" text="My Bookings" styleClass="title-label">
+               <font><Font name="System Bold" size="20.0" /></font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="refreshButton" onAction="#handleRefresh" text="🔄 Refresh" styleClass="secondary-button"/>
+         </children>
+      </HBox>
+   </top>
+
+   <!-- Main Content -->
+   <center>
+      <VBox spacing="20.0" styleClass="content-area">
+         <padding><Insets top="20.0" bottom="20.0" left="20.0" right="20.0"/></padding>
+         <children>
+
+            <!-- Search and Filter Section -->
+            <HBox spacing="15.0" styleClass="glass-card" alignment="CENTER_LEFT">
+               <children>
+                  <Label text="🔍 Search & Filter:" styleClass="glass-text"/>
+                  <TextField fx:id="searchField" promptText="Search by attraction or booking ID..." prefWidth="200.0" styleClass="glass-input"/>
+                  <ComboBox fx:id="statusFilter" promptText="Filter by Status" prefWidth="150.0" styleClass="glass-input"/>
+                  <Button fx:id="clearFiltersButton" onAction="#handleClearFilters" text="Clear" styleClass="glass-button"/>
+               </children>
+            </HBox>
+
+            <!-- Bookings Summary Cards -->
+            <HBox spacing="20.0">
+               <children>
+                  <VBox alignment="CENTER" spacing="8.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="totalBookingsLabel" styleClass="stat-number" text="0" />
+                        <Label styleClass="stat-title" text="Total Bookings" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" spacing="8.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="upcomingBookingsLabel" styleClass="stat-number" text="0" />
+                        <Label styleClass="stat-title" text="Upcoming" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" spacing="8.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="completedBookingsLabel" styleClass="stat-number" text="0" />
+                        <Label styleClass="stat-title" text="Completed" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" spacing="8.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="totalSpentLabel" styleClass="stat-number" text="NPR 0" />
+                        <Label styleClass="stat-title" text="Total Spent" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+
+            <!-- Bookings Table -->
+            <VBox spacing="15.0" styleClass="glass-panel">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="15.0">
+                     <children>
+                        <Label text="📅 My Bookings" styleClass="glass-text">
+                           <font><Font name="System Bold" size="16.0" /></font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="bookingCountLabel" text="Showing 0 bookings" styleClass="glass-text"/>
+                     </children>
+                  </HBox>
+                  
+                  <TableView fx:id="bookingsTable" VBox.vgrow="ALWAYS" styleClass="enhanced-table">
+                     <columns>
+                        <TableColumn fx:id="bookingIdCol" text="Booking ID" prefWidth="120.0"/>
+                        <TableColumn fx:id="attractionCol" text="Attraction" prefWidth="250.0"/>
+                        <TableColumn fx:id="visitDateCol" text="Visit Date" prefWidth="120.0"/>
+                        <TableColumn fx:id="statusCol" text="Status" prefWidth="100.0"/>
+                        <TableColumn fx:id="peopleCol" text="People" prefWidth="80.0"/>
+                        <TableColumn fx:id="amountCol" text="Amount (NPR)" prefWidth="120.0"/>
+                     </columns>
+                  </TableView>
+                  
+                  <!-- Action Buttons -->
+                  <HBox spacing="10.0" alignment="CENTER_LEFT">
+                     <children>
+                        <Button fx:id="viewDetailsButton" onAction="#handleViewDetails" text="📋 View Details" styleClass="primary-button" disable="true"/>
+                        <Button fx:id="cancelBookingButton" onAction="#handleCancelBooking" text="❌ Cancel Booking" styleClass="warning-button" disable="true"/>
+                        <Button fx:id="rebookButton" onAction="#handleRebook" text="🔄 Rebook" styleClass="secondary-button" disable="true"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="reportEmergencyButton" onAction="#handleReportEmergency" text="🚨 Report Emergency" styleClass="emergency-button"/>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+
+            <!-- Instructions -->
+            <VBox spacing="10.0" styleClass="info-card">
+               <children>
+                  <Label text="📌 Instructions" styleClass="info-title">
+                     <font><Font name="System Bold" size="14.0" /></font>
+                  </Label>
+                  <Label text="• Select a booking from the table to view details or cancel it" styleClass="info-text"/>
+                  <Label text="• You can only cancel bookings that are not yet completed" styleClass="info-text"/>
+                  <Label text="• Use the emergency button if you need immediate assistance" styleClass="info-text"/>
+                  <Label text="• Contact information: Tourist Helpline 1144" styleClass="info-text"/>
+               </children>
+            </VBox>
+
+         </children>
+      </VBox>
+   </center>
+
+</BorderPane><
+/StackPane>

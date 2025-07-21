@@ -1,0 +1,6 @@
+ATT001,Mount Everest,सगरमाथा,Khumbu, Solukhumbu,World's highest mountain peak,संसारको सबैभन्दा अग्लो हिमाल,Mountain,5000.0,everest.jpg,4.9,true,Khumbu,Solukhumbu,27.9881,86.9250
+ATT002,Pashupatinath Temple,पशुपतिनाथ मन्दिर,Kathmandu, Bagmati,Sacred Hindu temple dedicated to Lord Shiva,भगवान शिवलाई समर्पित पवित्र हिन्दू मन्दिर,Religious,1000.0,pashupatinath.jpg,4.8,true,Kathmandu,Bagmati,27.7109,85.3484
+ATT003,Boudhanath Stupa,बौधनाथ स्तुप,Kathmandu, Bagmati,Ancient Buddhist stupa,पुरानो बौद्ध स्तुप,Religious,200.0,boudhanath.jpg,4.7,true,Kathmandu,Bagmati,27.7215,85.3620
+ATT004,Chitwan National Park,चितवन राष्ट्रिय निकुञ्ज,Chitwan, Narayani,Wildlife sanctuary with rhinos and tigers,गैंडा र बाघसहितको वन्यजन्तु अभयारण्य,Wildlife,2000.0,chitwan.jpg,4.6,true,Chitwan,Narayani,27.5291,84.3542
+ATT005,Annapurna Base Camp,अन्नपूर्ण बेस क्याम्प,Kaski, Gandaki,Popular trekking destination,लोकप्रिय ट्रेकिङ गन्तव्य,Mountain,3000.0,abc.jpg,4.7,true,Kaski,Gandaki,28.5311,83.8780
+ATT006,Lumbini,लुम्बिनी,Rupandehi, Lumbini,Birthplace of Lord Buddha,भगवान बुद्धको जन्मस्थान,Religious,500.0,lumbini.jpg,4.8,true,Rupandehi,Lumbini,27.4833,83.2767

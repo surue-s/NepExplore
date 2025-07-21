@@ -1,0 +1,5 @@
+ADM001,admin,admin123,admin@tourism.np,System Administrator,,ADMIN,SUPER
+TOU001,tourist1,pass123,tourist1@email.com,John Doe,+1234567890,TOURIST,American,28
+GUD001,guide1,guide123,guide1@tourism.np,Ram Bahadur Shrestha,+9779841234567,GUIDE,LIC001,English;Nepali;Hindi,Cultural;Mountain,4.8,9
+TOU910,sachet,sachet123,sachet3@gmail.com,Sachet Ghimire,999999,TOURIST,Nepali,18
+TOU598,Try,try@gmail.com,try@gmail.com,try try,919191919,TOURIST,Nepali,25

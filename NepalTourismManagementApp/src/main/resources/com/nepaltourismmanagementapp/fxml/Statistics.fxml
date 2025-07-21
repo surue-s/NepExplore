@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.nepaltourismmanagementapp.controller.StatisticsController">
+
+   <!-- Background Image -->
+   <ImageView fitWidth="1200" fitHeight="800" preserveRatio="false">
+      <image>
+         <Image url="@../images/nepal-background.jpg" />
+      </image>
+   </ImageView>
+
+   <!-- Main Content -->
+   <BorderPane>
+      <!-- Header -->
+      <top>
+         <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="top-nav">
+            <padding><Insets top="15.0" bottom="15.0" left="20.0" right="20.0"/></padding>
+            <children>
+               <Button fx:id="backButton" onAction="#handleBack" text="← Back" styleClass="nav-button"/>
+               <Label fx:id="titleLabel" text="📊 Statistics Dashboard" sty
